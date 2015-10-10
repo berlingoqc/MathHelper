@@ -1,4 +1,4 @@
-from math import *
+﻿from math import *
 import sys
 
 def parse_args(args):
@@ -6,18 +6,30 @@ def parse_args(args):
 	g = {'plar':plar,'plsr':plsr,'pigeonnier':pigeonnier\
 	,'csr':csr,'pourcentage':pourcentage,'binomial':binomial}
 	equation = ""
-	for c, item in enumerate(args[:]):
-		if item in ['+','*','/','-',' ']:
-			#Probleme ici avec les args coupé donc certain cais
-			#il en faut 2 et parfois 3 ...
-			equation += str(g[args[0]](*[args[c-3],args[c - 2], args[c - 1]])) + item
-	a = eval(equation)
+	if args[0] in ('plar','plsr','csr'):
+		for c, item in enumerate(args[:]):
+			if item in ['+','*','/','-',' ']:
+				#Probleme ici avec les args coupé donc certain cais
+				#il en faut 2 et parfois 3 ...
+				print(args)
+				equation += str(g[args[0]](*[args[c - 2], args[c - 1]])) + item
+		a = eval(equation)
+	else:
+		a = g[args[0]](*args[1:])
 	return a
 
 def binomial(*args):
 	print(args)
-	x, n, p = int(args[0]), int(args[1]), float(args[2])
+	if len(args[0]) != 1:
+
+
+	else:
+		x, n, p = int(args[0]), int(args[1]), float(args[2])
+		a = _bi(x,n,p)
+	return a
+def _bi(x,n,p):
 	return round(csr(*[n,x]) * p**x * (1-p)**(n-x),3)
+
 
 def plar(*args):
 	#Placement lineaire avec repetition
